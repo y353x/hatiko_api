@@ -7,13 +7,13 @@
 - интегрированный Телеграм Бот на библиотеке pyTelegramBotAPI
 
 ### Регистрация пользователя API-сервиса:
-- на эндпоинт /auth/users/ POST запрос с JSON:  
+- POST запрос на эндпоинт /auth/users/ JSON:  
     {  
     "username": "your_username",  
     "password": "your_pass"  
     }  
 ### Получение JWT токена:
-- на эндпоинт /auth/jwt/create/ POST запрос с JSON:  
+- POST запрос на эндпоинт /auth/jwt/create/ JSON:  
     {  
     "username": "your_username",  
     "password": "your_pass"  
@@ -22,7 +22,7 @@
   для запросов к эндпоинту /api/check-imei/
 
 ### Запрос проверки imei:
-- на эндпоинт /api/check-imei/ POST запрос с JSON:  
+- POST запрос на эндпоинт /api/check-imei/ JSON:  
     {  
     "imei": your_device_imei,  
     "token": "api.imeicheck.net_token"  
@@ -30,7 +30,7 @@
     Авторизация Bearer Token.
 
 ### Запросы к Телеграм Боту:
-- /start - проверка автивности бота.
+- /start - проверка активности бота.
 - imei - номер imei для проверки (15 символов)
 
 ## Запуск проекта:
@@ -45,4 +45,4 @@
 `docker exec hatiko_backend_container python manage.py migrate`
 - запустить Телеграм Бот в контейнере  
 `docker exec -d hatiko_backend_container python manage.py bot`
-- API доступен по адресу http://127.0.0.1:8000/
+- API доступен локально по адресу http://127.0.0.1:8000/

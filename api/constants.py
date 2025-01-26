@@ -1,1 +1,2 @@
 IMEI_LENGTH = 15
+IMEI_REGEX = r'^[0-9]+$'

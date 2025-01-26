@@ -1,9 +1,11 @@
 import os
+import re
 
 from django.core.management.base import BaseCommand
 from dotenv import load_dotenv
 from telebot import TeleBot
 
+from api.constants import IMEI_LENGTH, IMEI_REGEX
 from api.requests import imei_check_request
 
 load_dotenv()
@@ -24,20 +26,20 @@ class Command(BaseCommand):
 
     @bot.message_handler(content_types=['text'])
     def handle_text(message):
-        print(WHITE_LIST)
+        text = message.text
         if message.chat.id not in WHITE_LIST:
-            bot.send_message(message.chat.id, 'not in white list')
-        elif len(message.text) != 15:
-            bot.send_message(message.chat.id, 'wrong imei length')
+            error = 'Not in white list'
+            bot.send_message(message.chat.id, error)
+        elif len(text) != IMEI_LENGTH or not re.match(IMEI_REGEX, str(text)):
+            error = 'Wrong imei. Should contain 15 digits only'
+            bot.send_message(message.chat.id, error)
         else:
-            imei = message.text
+            imei = text
             try:
                 check_result = imei_check_request(imei, IMEI_API_TOKEN)
-                bot.send_message(message.chat.id,
-                                 f'imei: {message.text}\n{check_result}')
+                bot.send_message(message.chat.id, check_result)
             except BaseException:
-                bot.send_message(
-                    message.chat.id, 'ошибка по запросу: ' + message.text)
+                bot.send_message(message.chat.id, f'ошибка по запросу: {text}')
 
     def handle(self, *args, **kwargs):
         bot.infinity_polling()
