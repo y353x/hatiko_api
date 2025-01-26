@@ -11,13 +11,15 @@ from api.serializers import ImeiSerializer
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def check_imei(request):
+    """Функция проверки imei из запроса."""
+
     serializer = ImeiSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     try:
         imei = serializer.validated_data['imei']
         token = serializer.validated_data['token']
     except IntegrityError:
-        error = 'ошибка'
+        error = 'ошибка внесения данных'
         return Response(error, status.HTTP_400_BAD_REQUEST)
 
     check_result = imei_check_request(imei, token)

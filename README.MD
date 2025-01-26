@@ -36,7 +36,7 @@
 ## Запуск проекта:
 - клонировать проект  
 `git clone`
-- создать .env файл по примеру env.example
+- создать .env файл по примеру .env.example
 - создать образ Docker  
 `docker build -t hatiko_backend . `
 - запустить контейнер с образом  
