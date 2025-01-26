@@ -16,7 +16,7 @@ def check_imei(request):
     serializer = ImeiSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     try:
-        imei = serializer.validated_data['imei']
+        imei = int(serializer.validated_data['imei'])
         token = serializer.validated_data['token']
     except IntegrityError:
         error = 'ошибка внесения данных'
