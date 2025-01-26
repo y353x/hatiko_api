@@ -7,18 +7,18 @@
 - интегрированный Телеграм Бот на библиотеке pyTelegramBotAPI
 
 Регистрация пользователя API-сервиса:
-- на эндпоинт /auth/users/ POST запрос с JSON:
-    {
-    "username": "your_username",
-    "password": "your_pass"
-    }
+- на эндпоинт /auth/users/ POST запрос с JSON:  
+    {  
+    "username": "your_username",  
+    "password": "your_pass"  
+    }  
 Получение JWT токена:
-- на эндпоинт /auth/jwt/create/ POST запрос с JSON:
-    {
-    "username": "your_username",
-    "password": "your_pass"
-    }
-  "access" токен из ответа используется
+- на эндпоинт /auth/jwt/create/ POST запрос с JSON:  
+    {  
+    "username": "your_username",  
+    "password": "your_pass"  
+    }  
+  "access" токен из ответа используется  
   для запросов к эндпоинту /api/check-imei/
 
 Запрос проверки imei:
