@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 from dotenv import load_dotenv
 from telebot import TeleBot
 
-from api.constants import IMEI_LENGTH, IMEI_REGEX
+from api.constants import IMEI_REGEX
 from api.requests import imei_check_request
 
 load_dotenv()
@@ -30,7 +30,7 @@ class Command(BaseCommand):
         if message.chat.id not in WHITE_LIST:
             error = 'Not in white list'
             bot.send_message(message.chat.id, error)
-        elif len(text) != IMEI_LENGTH or not re.match(IMEI_REGEX, str(text)):
+        elif not re.match(IMEI_REGEX, str(text)):
             error = 'Wrong imei. Should contain 15 digits only'
             bot.send_message(message.chat.id, error)
         else:
